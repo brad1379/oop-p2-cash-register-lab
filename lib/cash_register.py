@@ -14,6 +14,7 @@ class CashRegister:
 
   @discount.setter
   def discount(self, discount):
+    # checks if the discount is and in and between 0 and 100 inclusive
     if isinstance(discount, int) and 0 <= discount <= 100:
       self._discount = discount
     else: 
@@ -25,6 +26,7 @@ class CashRegister:
       self.items.append(item)
     else:
       self.total = self.total + (price * quantity)
+      # appends the items based on the quantity if it's greater than zero
       for _ in range(quantity):
         self.items.append(item)
 
@@ -41,6 +43,7 @@ class CashRegister:
     if self.discount == 0:
       print("There is no discount to apply.")
     else: 
+      # calculate discount
       self.total = self.total - (self.total * (self.discount / 100))
       print(f"After the discount, the total comes to ${self.total:g}.")
 
@@ -48,7 +51,7 @@ class CashRegister:
     if len(self.previous_transactions) == 0:
           print("There is no transaction to void.")
     else: 
-      prev_trans = self.previous_transactions.pop()
+      prev_trans = self.previous_transactions.pop() # store the popped transaction in a variable to update the total
       if prev_trans["quantity"] == 0:
         self.total = self.total - prev_trans["price"]
       else: 
